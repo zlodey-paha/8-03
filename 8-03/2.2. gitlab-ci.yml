@@ -1,0 +1,45 @@
+stages:
+  - validate
+  - test
+  - build
+  - deploy
+
+validate-code:
+  stage: validate
+  tags:
+    - docker
+  image: alpine:latest
+  script:
+    - echo "Check file"
+    - echo "OK"
+
+run-tests:
+  stage: test
+  tags:
+    - docker
+  image: node:16-alpine
+  script:
+    - echo "Running test"
+    - echo "Test OK"
+
+build-app:
+  stage: build
+  tags:
+    - docker
+  image: node:16-alpine
+  script:
+    - echo "building"
+    - echo "building complete"
+  artifacts:
+    paths:
+      - build/
+
+deploy-app:
+  stage: deploy
+  tags:
+    - docker
+  image: alpine:latest
+  script:
+    - echo "deploy-app"
+    - echo "deploy OK"
+  when: manual
